@@ -13,6 +13,7 @@ import java.util.List;
 @Repository
 public interface ShowtimeRepository extends JpaRepository<Showtime, Long> {
     List<Showtime> findByMovieIdAndStatusOrderByStartTimeAsc(Long movieId, ShowtimeStatus status);
+    List<Showtime> findByMovieId(Long movieId);
     List<Showtime> findByStatusOrderByStartTimeAsc(ShowtimeStatus status);
 
     @Query("SELECT s FROM Showtime s WHERE s.movie.id = :movieId AND s.startTime >= :fromTime AND s.status = :status ORDER BY s.startTime ASC")

@@ -153,17 +153,17 @@ public class DataInitializer implements CommandLineRunner {
                     today = today.plusDays(1);
                 }
 
-                // Schedule showtimes
+                // Schedule showtimes with INR pricing (Regular & VIP)
                 Showtime s1 = new Showtime(movies.get(0), t1, today.withHour(11).withMinute(30), today.withHour(14).withMinute(0),
-                        new BigDecimal("12.50"), new BigDecimal("18.00"), ShowtimeStatus.ACTIVE);
+                        new BigDecimal("250.00"), new BigDecimal("400.00"), ShowtimeStatus.ACTIVE);
                 Showtime s2 = new Showtime(movies.get(0), t2, today.withHour(15).withMinute(0), today.withHour(17).withMinute(30),
-                        new BigDecimal("14.00"), new BigDecimal("20.00"), ShowtimeStatus.ACTIVE);
+                        new BigDecimal("280.00"), new BigDecimal("450.00"), ShowtimeStatus.ACTIVE);
                 Showtime s3 = new Showtime(movies.get(1), t1, today.withHour(18).withMinute(0), today.withHour(21).withMinute(0),
-                        new BigDecimal("13.00"), new BigDecimal("19.50"), ShowtimeStatus.ACTIVE);
+                        new BigDecimal("250.00"), new BigDecimal("400.00"), ShowtimeStatus.ACTIVE);
                 Showtime s4 = new Showtime(movies.get(2), t2, today.withHour(19).withMinute(30), today.withHour(22).withMinute(15),
-                        new BigDecimal("14.50"), new BigDecimal("21.00"), ShowtimeStatus.ACTIVE);
+                        new BigDecimal("300.00"), new BigDecimal("500.00"), ShowtimeStatus.ACTIVE);
                 Showtime s5 = new Showtime(movies.get(3), t1, today.plusDays(1).withHour(14).withMinute(0), today.plusDays(1).withHour(17).withMinute(30),
-                        new BigDecimal("15.00"), new BigDecimal("22.00"), ShowtimeStatus.ACTIVE);
+                        new BigDecimal("250.00"), new BigDecimal("400.00"), ShowtimeStatus.ACTIVE);
 
                 showtimeRepository.saveAll(List.of(s1, s2, s3, s4, s5));
                 log.info("Seeded 5 upcoming showtimes!");

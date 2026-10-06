@@ -103,9 +103,9 @@
                 <div class="col-sm-6 col-xl-3">
                     <div class="stat-card">
                         <div class="stat-icon amber">
-                            <i class="bi bi-currency-dollar"></i>
+                            <i class="bi bi-currency-rupee"></i>
                         </div>
-                        <h3 class="stat-number" id="statRevenue">$0.00</h3>
+                        <h3 class="stat-number" id="statRevenue">₹0.00</h3>
                         <div class="stat-label">Total Revenue</div>
                     </div>
                 </div>
@@ -165,7 +165,7 @@
                 document.getElementById('statMovies').textContent = stats.totalMovies;
                 document.getElementById('statShowtimes').textContent = stats.activeShowtimes;
                 document.getElementById('statBookings').textContent = stats.totalBookings;
-                document.getElementById('statRevenue').textContent = '$' + (stats.totalRevenue ? Number(stats.totalRevenue).toFixed(2) : '0.00');
+                document.getElementById('statRevenue').textContent = '₹' + (stats.totalRevenue ? Number(stats.totalRevenue).toFixed(2) : '0.00');
             }
         } catch (e) {
             console.error('Error loading stats', e);
@@ -199,7 +199,7 @@
                             <td>${b.movieTitle}</td>
                             <td>${b.theaterName}</td>
                             <td><span class="badge bg-light text-dark border">${(b.seatCodes || []).join(', ')}</span></td>
-                            <td class="fw-bold text-success">$${Number(b.totalAmount).toFixed(2)}</td>
+                            <td class="fw-bold text-success">₹${Number(b.totalAmount).toFixed(2)}</td>
                             <td>${statusBadge}</td>
                             <td class="small text-muted">${dateFormatted}</td>
                         </tr>

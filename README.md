@@ -163,7 +163,7 @@ Once the backend is running, open any web browser:
    - Password: `admin123` (or configured value in `app.properties`)
 2. **Dashboard Features**:
    - **Executive Dashboard** (`/admin/index.html`): Real-time metrics (Active Movies, Showtimes, Bookings, Total Revenue) and recent transactions.
-   - **Movie Catalog & Poster Upload** (`/admin/movies.html`): View movies, add new movies, upload poster image files directly into MySQL binary `LONGBLOB` columns with live preview, and toggle movie active status.
+   - **Movie Catalog & Management** (`/admin/movies.html`): View movies, add new movies, upload poster image files directly into MySQL binary `LONGBLOB` columns with live preview, toggle movie active status, and delete movies (with cascading removal of associated showtimes and bookings).
    - **Showtime Scheduling** (`/admin/showtimes.html`): Schedule screening dates/times, assign screens, and configure regular & VIP ticket prices.
    - **Bookings Registry** (`/admin/bookings.html`): Search and monitor all transactions, seats booked, and execute cancellations/refunds.
    - **User Accounts & Removal** (`/admin/users.html`): View registered customer accounts and their booking frequency. Cinema administrators have full control to permanently delete user accounts (with cascade deletion of associated bookings).
@@ -257,7 +257,7 @@ java -jar target/movie-booking-app-1.0.0.jar
 | `GET` | `/api/admin/movies` | Get all movies (active & inactive) |
 | `POST` | `/api/admin/movies` | Create movie with multipart poster upload |
 | `PUT` | `/api/admin/movies/{id}` | Update movie and replace poster |
-| `DELETE` | `/api/admin/movies/{id}` | Delete movie |
+| `DELETE` | `/api/admin/movies/{id}` | Permanently delete movie and cascade delete associated showtimes and bookings |
 | `GET` | `/api/admin/showtimes` | List all scheduled screenings |
 | `POST` | `/api/admin/showtimes` | Schedule new screening |
 | `DELETE` | `/api/admin/showtimes/{id}` | Remove showtime |

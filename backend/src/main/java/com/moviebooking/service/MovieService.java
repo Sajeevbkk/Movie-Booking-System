@@ -2,8 +2,12 @@ package com.moviebooking.service;
 
 import com.moviebooking.dto.MovieCreateRequest;
 import com.moviebooking.dto.MovieDto;
+import com.moviebooking.entity.Booking;
 import com.moviebooking.entity.Movie;
+import com.moviebooking.entity.Showtime;
+import com.moviebooking.repository.BookingRepository;
 import com.moviebooking.repository.MovieRepository;
+import com.moviebooking.repository.ShowtimeRepository;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -18,9 +22,15 @@ import java.util.stream.Collectors;
 public class MovieService {
 
     private final MovieRepository movieRepository;
+    private final ShowtimeRepository showtimeRepository;
+    private final BookingRepository bookingRepository;
 
-    public MovieService(MovieRepository movieRepository) {
+    public MovieService(MovieRepository movieRepository,
+                        ShowtimeRepository showtimeRepository,
+                        BookingRepository bookingRepository) {
         this.movieRepository = movieRepository;
+        this.showtimeRepository = showtimeRepository;
+        this.bookingRepository = bookingRepository;
     }
 
     @Cacheable("movies")
@@ -120,10 +130,18 @@ public class MovieService {
     @CacheEvict(value = {"movies", "movie_detail", "posters", "showtimes"}, allEntries = true)
     @Transactional
     public void deleteMovie(Long id) {
-        if (!movieRepository.existsById(id)) {
-            throw new IllegalArgumentException("Movie not found with id: " + id);
+        Movie movie = movieRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Movie not found with id: " + id));
+
+        // Delete all showtimes for this movie, cascading through their bookings & booking seats
+        List<Showtime> showtimes = showtimeRepository.findByMovieId(id);
+        for (Showtime showtime : showtimes) {
+            List<Booking> bookings = bookingRepository.findByShowtimeId(showtime.getId());
+            bookingRepository.deleteAll(bookings);
         }
-        movieRepository.deleteById(id);
+        showtimeRepository.deleteAll(showtimes);
+
+        movieRepository.delete(movie);
     }
 
     private MovieDto toDto(Movie movie) {

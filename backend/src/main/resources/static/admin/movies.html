@@ -308,14 +308,14 @@
     });
 
     async function deleteMovie(id) {
-        if (!confirm('Are you sure you want to delete this movie?')) return;
+        if (!confirm('Are you sure you want to delete this movie?\nThis will permanently delete the movie and any associated showtimes and bookings.')) return;
         try {
             const res = await apiFetch(`/api/admin/movies/${id}`, { method: 'DELETE' });
             if (res.ok) {
                 loadMovies();
             } else {
-                const err = await res.json();
-                alert('Error: ' + (err.error || 'Failed to delete'));
+                const err = await res.json().catch(() => ({}));
+                alert('Error: ' + (err.error || 'Failed to delete movie'));
             }
         } catch (e) {
             alert('Error deleting movie: ' + e.message);

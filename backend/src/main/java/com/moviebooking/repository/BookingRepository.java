@@ -14,6 +14,7 @@ import java.util.Optional;
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
     List<Booking> findByUserIdOrderByBookingTimeDesc(Long userId);
+    List<Booking> findByShowtimeId(Long showtimeId);
     List<Booking> findAllByOrderByBookingTimeDesc();
     Optional<Booking> findByBookingNumber(String bookingNumber);
     long countByBookingStatus(BookingStatus status);

@@ -140,7 +140,7 @@
                             <td>${b.theaterName} <span class="badge bg-light text-secondary border small">${b.screenType || ''}</span></td>
                             <td class="small">${showtimeDate}</td>
                             <td><span class="badge bg-primary-subtle text-primary border">${(b.seatCodes || []).join(', ')}</span></td>
-                            <td class="fw-bold text-success">$${Number(b.totalAmount).toFixed(2)}</td>
+                            <td class="fw-bold text-success">₹${Number(b.totalAmount).toFixed(2)}</td>
                             <td>${statusBadge}</td>
                             <td class="text-end">${cancelBtn}</td>
                         </tr>

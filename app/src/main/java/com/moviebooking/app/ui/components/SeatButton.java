@@ -22,7 +22,7 @@ public class SeatButton extends JToggleButton {
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         setText(seat.getSeatCode());
-        setToolTipText(String.format("Seat %s [%s] - $%.2f",
+        setToolTipText(String.format("Seat %s [%s] - ₹%.2f",
                 seat.getSeatCode(), seat.getSeatType(), seat.getPrice()));
 
         if (seat.isBooked()) {

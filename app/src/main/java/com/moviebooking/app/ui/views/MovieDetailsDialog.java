@@ -137,7 +137,7 @@ public class MovieDetailsDialog extends JDialog {
         public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
             super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
             if (value instanceof Showtime s) {
-                String text = String.format("  %s  |  %s (%s)  |  Regular: $%.2f  •  VIP: $%.2f",
+                String text = String.format("  %s  |  %s (%s)  |  Regular: ₹%.2f  •  VIP: ₹%.2f",
                         s.getStartTime() != null ? s.getStartTime().format(TIME_FMT) : "TBD",
                         s.getTheaterName(),
                         s.getScreenType() != null ? s.getScreenType() : "Standard",

@@ -25,23 +25,29 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.moviebooking.entity.Booking;
+import com.moviebooking.repository.BookingRepository;
+
 @Service
 public class ShowtimeService {
 
     private final ShowtimeRepository showtimeRepository;
     private final SeatRepository seatRepository;
     private final BookingSeatRepository bookingSeatRepository;
+    private final BookingRepository bookingRepository;
     private final MovieService movieService;
     private final TheaterService theaterService;
 
     public ShowtimeService(ShowtimeRepository showtimeRepository,
                            SeatRepository seatRepository,
                            BookingSeatRepository bookingSeatRepository,
+                           BookingRepository bookingRepository,
                            MovieService movieService,
                            TheaterService theaterService) {
         this.showtimeRepository = showtimeRepository;
         this.seatRepository = seatRepository;
         this.bookingSeatRepository = bookingSeatRepository;
+        this.bookingRepository = bookingRepository;
         this.movieService = movieService;
         this.theaterService = theaterService;
     }
@@ -135,10 +141,14 @@ public class ShowtimeService {
     @CacheEvict(value = "showtimes", allEntries = true)
     @Transactional
     public void deleteShowtime(Long id) {
-        if (!showtimeRepository.existsById(id)) {
-            throw new IllegalArgumentException("Showtime not found with id: " + id);
-        }
-        showtimeRepository.deleteById(id);
+        Showtime showtime = showtimeRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Showtime not found with id: " + id));
+
+        // Delete all bookings for this showtime (cascading to booking seats)
+        List<Booking> bookings = bookingRepository.findByShowtimeId(id);
+        bookingRepository.deleteAll(bookings);
+
+        showtimeRepository.delete(showtime);
     }
 
     private ShowtimeDto toDto(Showtime s) {

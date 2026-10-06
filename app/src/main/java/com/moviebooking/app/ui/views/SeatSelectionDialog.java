@@ -104,8 +104,8 @@ public class SeatSelectionDialog extends JDialog {
         legend.setOpaque(false);
         legend.setBorder(BorderFactory.createEmptyBorder(8, 0, 0, 0));
 
-        legend.add(createLegendItem(new Color(255, 255, 255), new Color(203, 213, 225), "Regular ($" + showtime.getRegularPrice() + ")"));
-        legend.add(createLegendItem(new Color(254, 243, 199), new Color(245, 158, 11), "VIP ($" + showtime.getVipPrice() + ")"));
+        legend.add(createLegendItem(new Color(255, 255, 255), new Color(203, 213, 225), "Regular (₹" + showtime.getRegularPrice() + ")"));
+        legend.add(createLegendItem(new Color(254, 243, 199), new Color(245, 158, 11), "VIP (₹" + showtime.getVipPrice() + ")"));
         legend.add(createLegendItem(new Color(16, 185, 129), new Color(5, 150, 105), "Selected"));
         legend.add(createLegendItem(new Color(226, 232, 240), new Color(148, 163, 184), "Booked"));
 
@@ -146,7 +146,7 @@ public class SeatSelectionDialog extends JDialog {
         selectedSeatsLabel.setFont(new Font("Segoe UI", Font.BOLD, 13));
         selectedSeatsLabel.setForeground(new Color(15, 23, 42));
 
-        totalAmountLabel = new JLabel("Total Amount: $0.00");
+        totalAmountLabel = new JLabel("Total Amount: ₹0.00");
         totalAmountLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
         totalAmountLabel.setForeground(new Color(16, 185, 129));
 
@@ -245,7 +245,7 @@ public class SeatSelectionDialog extends JDialog {
     private void updateSelectionSummary() {
         if (selectedSeatButtons.isEmpty()) {
             selectedSeatsLabel.setText("Selected Seats: None");
-            totalAmountLabel.setText("Total Amount: $0.00");
+            totalAmountLabel.setText("Total Amount: ₹0.00");
             checkoutBtn.setEnabled(false);
             return;
         }
@@ -261,7 +261,7 @@ public class SeatSelectionDialog extends JDialog {
         }
 
         selectedSeatsLabel.setText("Selected Seats: " + String.join(", ", codes) + " (" + codes.size() + " seats)");
-        totalAmountLabel.setText(String.format("Total Amount: $%.2f", total));
+        totalAmountLabel.setText(String.format("Total Amount: ₹%.2f", total));
         checkoutBtn.setEnabled(true);
     }
 

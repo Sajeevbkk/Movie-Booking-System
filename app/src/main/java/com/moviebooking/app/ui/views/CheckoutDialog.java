@@ -92,9 +92,9 @@ public class CheckoutDialog extends JDialog {
 
         panel.add(createRow("Selected Seats (" + selectedSeats.size() + ")", String.join(", ", seatCodes)));
         panel.add(Box.createVerticalStrut(8));
-        panel.add(createRow("Ticket Subtotal", String.format("$%.2f", total)));
+        panel.add(createRow("Ticket Subtotal", String.format("₹%.2f", total)));
         panel.add(Box.createVerticalStrut(8));
-        panel.add(createRow("Convenience Fee & Taxes", "$0.00 (Waived)"));
+        panel.add(createRow("Convenience Fee & Taxes", "₹0.00 (Waived)"));
         panel.add(Box.createVerticalStrut(12));
 
         JSeparator sep = new JSeparator();
@@ -113,7 +113,7 @@ public class CheckoutDialog extends JDialog {
         totalLbl.setFont(new Font("Segoe UI", Font.BOLD, 15));
         totalLbl.setForeground(new Color(15, 23, 42));
 
-        JLabel totalVal = new JLabel(String.format("$%.2f", total));
+        JLabel totalVal = new JLabel(String.format("₹%.2f", total));
         totalVal.setFont(new Font("Segoe UI", Font.BOLD, 18));
         totalVal.setForeground(new Color(16, 185, 129));
 
@@ -195,7 +195,7 @@ public class CheckoutDialog extends JDialog {
                 "Movie: %s\n" +
                 "Screen: %s\n" +
                 "Seats: %s\n" +
-                "Amount Paid: $%.2f\n\n" +
+                "Amount Paid: ₹%.2f\n\n" +
                 "Your tickets are saved to 'My Bookings'. Enjoy the movie!",
                 booking.getBookingNumber(),
                 booking.getMovieTitle(),

@@ -43,7 +43,7 @@ public class MyBookingsDialog extends JDialog {
         add(header, BorderLayout.NORTH);
 
         // Table
-        String[] cols = {"Booking Ref", "Movie", "Theater", "Screening Time", "Seats", "Total ($)", "Status", "Action"};
+        String[] cols = {"Booking Ref", "Movie", "Theater", "Screening Time", "Seats", "Total (₹)", "Status", "Action"};
         tableModel = new DefaultTableModel(cols, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -102,7 +102,7 @@ public class MyBookingsDialog extends JDialog {
                             b.getTheaterName(),
                             timeStr,
                             seatsStr,
-                            String.format("$%.2f", b.getTotalAmount()),
+                            String.format("₹%.2f", b.getTotalAmount()),
                             b.getBookingStatus(),
                             actionStr
                     });
