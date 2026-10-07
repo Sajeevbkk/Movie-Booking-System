@@ -90,7 +90,7 @@ nb-configuration.xml
 # Application Cache (CineMagic Local Image Disk Cache)
 .cinemagic/
 .cache/
-cache/
+/cache/
 
 # Environment & Local Secrets Overrides (Keep default app.properties tracked)
 .env
